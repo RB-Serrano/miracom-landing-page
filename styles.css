@@ -1,0 +1,661 @@
+body, html {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('images/inserter-overhead.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+}
+
+/* Ensure all text inherits Inter font except where specifically overridden */
+p:not(footer p), button, div:not(footer div) {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+/* Add specific styling for h2 */
+h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Ensure footer keeps its specific styling */
+footer, footer p, footer div {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+}
+
+.hero {
+    width: 100%;
+    min-height: 40vh;    /* Restore original height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;          /* Ensure no padding */
+    margin-top: -150px;   /* Pull up to original position */
+}
+
+.hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.hero-content {
+    text-align: center;
+    width: 100%;
+}
+
+.hero-content p {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+nav, footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    position: relative;
+    width: 100%;
+    height: 180px;      /* Fixed height instead of vh */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+}
+
+.cta-button, 
+a.cta-button {
+    background-color: #4379BD;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;  /* Remove underline from links */
+    display: inline-block;  /* Allow padding on links */
+    font-size: 24px;  /* Match the default font size */
+    font-family: 'Inter', sans-serif;
+}
+
+.cta-button:hover {
+    background-color: #365f8a;
+}
+
+a.cta-button:hover {
+    background-color: #365f8a;
+    color: white;         /* Keep text white on hover */
+}
+
+.solutions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin: 10px auto;   /* Reduced from 20px */
+    padding: 5px;        /* Reduced from 10px */
+}
+
+.solution {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 400px;       /* Reduced from 450px */
+    width: 100%;    /* Full width within the grid */
+    padding: 10px;       /* Reduced from 15px */
+    box-sizing: border-box;
+    justify-content: space-between; /* Adjusted spacing */
+}
+
+.solution h2 {
+    margin: 0 0 10px 0;  /* Added margin */
+}
+
+.solution p {
+    margin: 0 0 15px 0;  /* Added margin */
+}
+
+.solution img {
+    width: 500px;        /* Fixed width */
+    height: 280px;       /* Fixed height with 16:9 ratio approximately */
+    margin: 10px auto;   /* Reduced from 15px */
+    object-fit: contain; /* Ensure full image is visible */
+    display: block;      /* Remove any inline spacing */
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+    /* Add flex properties for centering */
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    width: 70%;
+    max-width: 800px;
+    max-height: 90vh;    /* Prevent modal from being too tall */
+    overflow-y: auto;    /* Add scrolling if content is too long */
+    padding: 30px;
+    border-radius: 5px;
+    /* Remove margin since we're using flex */
+    margin: 0;
+    text-align: center;  /* Center all content including the button */
+}
+
+.modal-content .cta-button {
+    margin: 20px auto;   /* Add margin and auto for horizontal centering */
+    display: block;      /* Make button block-level for margin auto to work */
+}
+
+.modal-content h2 {
+    font-size: 48px;  /* 2x the normal 24px font size */
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.modal-content #modalSubtitle {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.modal-content #modalDescription {
+    font-size: 19px;  /* 24px * 0.8 = 19.2px, rounded to 19px */
+    line-height: 1.5;
+    margin: 15px 0;
+    text-align: left;    /* Left align the description */
+    padding: 0 10px;     /* Add some padding on the sides */
+}
+
+.close-button {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.video-container {
+    margin: 20px 0;
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cta-section {
+    width: 100%;
+    padding: 10px 0;     /* Reduced from 20px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    height: 100px;      /* Fixed height to fit in nav */
+    width: auto;
+    padding: 0;         /* Ensure no padding */
+    margin: 0;          /* Ensure no margin */
+    display: block;     /* Remove any inline spacing */
+}
+
+/* Product Page Specific Styles */
+.product-content {
+    width: 80%;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.product-section {
+    margin: 20px 0;
+}
+
+/* Booking Page Styles */
+.booking-form {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Booking Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Thank You Page Styles */
+.thank-you-content h1 {
+    color: #4379BD;
+    margin-bottom: 20px;
+}
+
+.thank-you-content p {
+    margin-bottom: 15px;
+}
+
+.thank-you-content .cta-button {
+    margin-top: 30px;
+}
+
+/* Thank You Page Styles */
+.thank-you-content {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+    .hero h1 {
+        font-size: 48px;
+    }
+    
+    .solution img {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .modal-content {
+        width: 85%;
+        padding: 20px;
+    }
+
+    .hero {
+        margin-top: 0;  /* Remove negative margin for responsive views */
+        min-height: 30vh;
+    }
+
+    nav {
+        height: 120px;  /* Reduce nav height */
+        margin-bottom: 20px;  /* Add space between nav and hero */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .solutions {
+        grid-template-columns: 1fr;  /* Change to single column */
+        width: 90%;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .modal-content h2 {
+        font-size: 36px;
+    }
+
+    .solution {
+        height: auto;
+        min-height: 350px;
+    }
+
+    p:not(footer p), button, div:not(footer div) {
+        font-size: 18px;
+    }
+
+    .modal-content #modalDescription {
+        font-size: 16px;
+    }
+
+    .hero {
+        margin-top: 10px;  /* Add small positive margin */
+    }
+
+    nav {
+        height: 100px;
+    }
+
+    .cta-button {
+        padding: 10px 20px;  /* Keep padding only */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo img {
+        height: 80px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+        padding: 0 15px;
+    }
+
+    .modal-content h2 {
+        font-size: 28px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .close-button {
+        right: 10px;
+        top: 5px;
+    }
+
+    .solution img {
+        height: 200px;
+    }
+
+    .cta-button {
+        padding: 8px 16px;  /* Keep padding only */
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 0 10px;
+    }
+
+    nav {
+        height: 80px;
+    }
+
+    .hero {
+        margin-top: 15px;
+    }
+}
+
+/* Fix for very small devices */
+@media screen and (max-width: 320px) {
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .solution {
+        padding: 5px;
+    }
+}
+
+/* Tablet Specific Styles */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .solutions {
+        gap: 30px;
+        width: 90%;
+    }
+
+    .solution {
+        height: 380px;
+    }
+
+    .solution img {
+        width: 90%;
+        height: 220px;
+    }
+
+    .modal-content {
+        width: 80%;
+        padding: 25px;
+    }
+
+    .modal-content h2 {
+        font-size: 42px;
+    }
+
+    .modal-content #modalSubtitle {
+        font-size: 22px;
+    }
+
+    .modal-content #modalDescription {
+        font-size: 18px;
+        padding: 0 15px;
+    }
+
+    .hero-content {
+        padding: 0 20px;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+    }
+
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 20px;
+    }
+
+    .hero {
+        margin-top: 20px;
+    }
+}
+
+/* Additional iPad-specific adjustments */
+@media screen and (width: 768px) and (height: 1024px),
+       screen and (width: 1024px) and (height: 768px) {
+    .hero {
+        margin-top: 0;  /* Reset margin */
+    }
+
+    .logo img {
+        height: 120px;
+    }
+
+    nav {
+        height: 150px;
+    }
+}
+
+/* Responsive Typography and Spacing */
+:root {
+    --base-font: 16px;
+    --scale-ratio: 1.2;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    :root {
+        --base-font: 15px;
+    }
+
+    .hero h1 {
+        font-size: calc(var(--base-font) * 3.2);
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .solution h2 {
+        font-size: calc(var(--base-font) * 1.5);
+    }
+
+    .solution p {
+        font-size: calc(var(--base-font) * 1.2);
+    }
+
+    .solution {
+        height: auto;
+        min-height: 300px;
+        padding: 20px;
+    }
+
+    .solution img {
+        width: 90%;
+        max-width: 450px;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+
+    .modal-content h2 {
+        font-size: calc(var(--base-font) * 2.4);
+    }
+
+    .modal-content #modalSubtitle {
+        font-size: calc(var(--base-font) * 1.4);
+    }
+
+    .modal-content #modalDescription {
+        font-size: calc(var(--base-font) * 1.1);
+        padding: 0 20px;
+        margin: 20px 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    :root {
+        --base-font: 14px;
+    }
+
+    .hero h1 {
+        font-size: calc(var(--base-font) * 2.5);
+        padding: 0 15px;
+        line-height: 1.3;
+    }
+
+    .hero-content p {
+        font-size: calc(var(--base-font) * 1.2);
+        padding: 0 20px;
+    }
+
+    .solution h2 {
+        font-size: calc(var(--base-font) * 1.4);
+    }
+
+    .solution p {
+        font-size: calc(var(--base-font) * 1.1);
+    }
+
+    .solution img {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+
+    .modal-content {
+        padding: 15px;
+        width: 95%;
+    }
+
+    .modal-content h2 {
+        font-size: calc(var(--base-font) * 2);
+    }
+
+    .modal-content #modalSubtitle {
+        font-size: calc(var(--base-font) * 1.2);
+    }
+
+    .modal-content #modalDescription {
+        font-size: var(--base-font);
+        line-height: 1.6;
+        padding: 0 15px;
+    }
+
+    .cta-button {
+        font-size: calc(var(--base-font) * 1.1);
+        padding: 10px 20px;
+    }
+
+    footer {
+        font-size: calc(var(--base-font) * 0.85);
+        padding: 15px;
+        line-height: 1.5;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --base-font: 13px;
+    }
+
+    .solution {
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .logo img {
+        height: 70px;
+    }
+
+    .modal-content {
+        padding: 10px;
+    }
+
+    .close-button {
+        font-size: 24px;
+        right: 8px;
+        top: 8px;
+    }
+}
+
+/* Improve touch targets on mobile */
+@media (hover: none) and (pointer: coarse) {
+    .cta-button, 
+    .close-button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
