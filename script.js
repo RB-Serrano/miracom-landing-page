@@ -35,6 +35,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const solutions = document.querySelectorAll('.solution');
     const video = document.getElementById('modalVideo');
 
+    const closeModal = () => {
+        modal.style.display = 'none';
+        video.pause();
+        toggleScrollLock();
+        // Clear the URL parameter when closing
+        const url = new URL(window.location);
+        url.searchParams.delete('modal');
+        window.history.pushState({}, '', url);
+    };
+
+    // Function to open modal with proper timing
+    const openModal = (productName) => {
+        console.log('Opening modal for:', productName); // Debug log
+        const data = solutionData[productName];
+        if (data) {
+            setTimeout(() => {
+                document.getElementById('modalTitle').textContent = data.title;
+                document.getElementById('modalSubtitle').textContent = data.subtitle;
+                document.getElementById('modalDescription').textContent = data.description;
+                document.getElementById('modalVideo').src = data.videosrc;
+                document.getElementById('modalLearnMore').href = data.pageUrl;
+                
+                modal.style.display = 'flex';
+                toggleScrollLock();
+                video.currentTime = 0;
+                video.play();
+            }, 100); // Small delay to ensure DOM is ready
+        }
+    };
+
+    // Check URL parameters immediately
+    const urlParams = new URLSearchParams(window.location.search);
+    const showModal = urlParams.get('modal');
+    if (showModal) {
+        openModal(showModal);
+    }
+
     // Function to toggle scroll lock
     const toggleScrollLock = () => {
         document.body.style.overflow = document.body.style.overflow === 'hidden' ? '' : 'hidden';
@@ -73,12 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
             video.play();
         });
     });
-
-    const closeModal = () => {
-        modal.style.display = 'none';
-        video.pause();
-        toggleScrollLock(); // Unlock scroll when modal closes
-    };
 
     closeButton.addEventListener('click', closeModal);
 
