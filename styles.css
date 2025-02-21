@@ -296,35 +296,80 @@ a.cta-button:hover {
 
 /* Booking Page Styles */
 .booking-form {
-    max-width: 600px;
+    max-width: 800px;
     margin: 40px auto;
-    padding: 20px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Added to prevent form from being too wide */
+    box-sizing: border-box; /* Added to include padding in width calculation */
 }
 
-/* Booking Form Styles */
-.form-group {
+.form-row {
+    display: flex;
+    gap: 20px;
     margin-bottom: 20px;
+    width: 100%; /* Added to ensure full width */
+    box-sizing: border-box; /* Added to include gap in width calculation */
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+.form-group {
+    margin-bottom: 25px;
+    width: 100%; /* Added to ensure full width */
+    box-sizing: border-box; /* Added to include padding in width calculation */
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
     font-family: 'Inter', sans-serif;
     font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Added to include padding in width calculation */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4379BD;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(67, 121, 189, 0.1);
 }
 
 .form-group textarea {
+    min-height: 120px;
     resize: vertical;
+}
+
+.booking-form .cta-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media screen and (max-width: 768px) {
+    .booking-form {
+        padding: 20px;
+        margin: 20px auto;
+        width: 95%;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
 }
 
 /* Thank You Page Styles */
