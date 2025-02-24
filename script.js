@@ -24,7 +24,7 @@ const solutionData = {
         title: 'MiraSERT',
         subtitle: '21st Century Insert Control',
         videosrc: 'videos/mirasert.mp4',
-        description: 'The ultimate inserter operating system is now available for purchase, including free upgrades with a support contract. It operates on a single MS Windows PC and uses non-proprietary hardware for flexibility. Data is securely stored in an SQL database for reliable access. The system is modular and expandable, allowing enhancements at purchase or later.',
+        description: 'MiraSERT integrates seamlessly with planning systems for job downloads and inserting run imports while minimizing maintenance with standard Windows-based hardware. Its secure SQL database protects critical data, and its modular design ensures scalability, making it a future-proof solution for growing businesses.',
         pageUrl: 'pages/mirasert.html'
     }
 };
