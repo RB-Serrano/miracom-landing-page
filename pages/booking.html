@@ -30,15 +30,24 @@
 
     <!-- Booking Form -->
     <section class="booking-form">
-        <form action="thank-you.html" method="GET">
+        <form action="https://formsubmit.co/ralphbernard.serrano@outsourceddoers.com" method="POST">
+            <!-- Customize your subject -->
+            <input type="hidden" name="_subject" value="New Miracom Booking Request">
+            <!-- Redirect to thank you page -->
+            <input type="hidden" name="_next" value="../pages/thank-you.html">
+            <!-- Disable captcha -->
+            <input type="hidden" name="_captcha" value="false">
+            <!-- Prevent spam -->
+            <input type="text" name="_honey" style="display:none">
+            
             <div class="form-row">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" required>
+                    <input type="text" id="firstName" name="First Name" required>
                 </div>
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" required>
+                    <input type="text" id="lastName" name="Last Name" required>
                 </div>
             </div>
             <div class="form-group">
@@ -67,8 +76,6 @@
                 <label for="message">Message (Optional)</label>
                 <textarea id="message" name="message" rows="4"></textarea>
             </div>
-            <input type="hidden" name="_next" value="../pages/thank-you.html">
-            <input type="hidden" name="_subject" value="New Booking Request">
             <button type="submit" class="cta-button">Submit</button>
         </form>
     </section>
