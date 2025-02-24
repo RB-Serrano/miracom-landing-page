@@ -29,6 +29,22 @@ body::before {
     opacity: 0.2;
 }
 
+/* Add a specific body class for the booking page */
+body.booking-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('images/booking.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+}
+
 /* Ensure all text inherits Inter font except where specifically overridden */
 p:not(footer p), button, div:not(footer div) {
     font-family: 'Inter', sans-serif;
