@@ -216,32 +216,97 @@ a.cta-button:hover {
 }
 
 .solution {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    height: 400px;       /* Reduced from 450px */
-    width: 100%;    /* Full width within the grid */
-    padding: 10px;       /* Reduced from 15px */
+    height: 400px;
+    width: 100%;
+    padding: 10px;
     box-sizing: border-box;
-    justify-content: space-between; /* Adjusted spacing */
+    overflow: hidden;
 }
 
 .solution h2 {
     margin: 0 0 10px 0;  /* Added margin */
+    z-index: 1;
 }
 
-.solution p {
-    margin: 0 0 15px 0;  /* Added margin */
+.solution .img-container {
+    position: relative;
+    overflow: hidden;
+    width: 500px;
+    height: 280px;
+    margin: 10px auto;
 }
 
 .solution img {
-    width: 500px;        /* Fixed width */
-    height: 280px;       /* Fixed height with 16:9 ratio approximately */
-    margin: 10px auto;   /* Reduced from 15px */
-    object-fit: contain; /* Ensure full image is visible */
-    display: block;      /* Remove any inline spacing */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
     cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.solution .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.solution p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: calc(100% - 20px);
+    color: white;
+    padding: 20px;
+    margin: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+    background: rgba(67, 121, 189, 0.85);
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+}
+
+/* Desktop hover effects */
+@media screen and (min-width: 1025px) {
+    .solution:hover p {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .solution:hover img {
+        transform: scale(1.05);
+        filter: blur(2px);
+    }
+}
+
+/* Mobile styles - reset hover effects */
+@media screen and (max-width: 1024px) {
+    .solution p {
+        position: static;
+        transform: none;
+        opacity: 1;
+        background: none;
+        color: inherit;
+        padding: 0;
+        margin: 0 0 15px 0;
+        backdrop-filter: none;
+        width: 100%;
+        pointer-events: auto;
+    }
+
+    .solution img {
+        transform: none;
+    }
 }
 
 .modal {
@@ -257,6 +322,14 @@ a.cta-button:hover {
     display: none;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-content {
@@ -271,6 +344,14 @@ a.cta-button:hover {
     /* Remove margin since we're using flex */
     margin: 0;
     text-align: center;  /* Center all content including the button */
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .modal-content .cta-button {

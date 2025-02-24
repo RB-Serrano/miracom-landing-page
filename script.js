@@ -36,10 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById('modalVideo');
 
     const closeModal = () => {
-        modal.style.display = 'none';
-        video.pause();
+        modal.classList.remove('show');
+        // Wait for transition to complete before hiding
+        setTimeout(() => {
+            modal.style.display = 'none';
+            video.pause();
+        }, 300);
         toggleScrollLock();
-        // Clear the URL parameter when closing
+        // Clear URL parameter
         const url = new URL(window.location);
         url.searchParams.delete('modal');
         window.history.pushState({}, '', url);
@@ -50,18 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Opening modal for:', productName); // Debug log
         const data = solutionData[productName];
         if (data) {
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalSubtitle').textContent = data.subtitle;
+            document.getElementById('modalDescription').textContent = data.description;
+            document.getElementById('modalVideo').src = data.videosrc;
+            document.getElementById('modalLearnMore').href = data.pageUrl;
+            
+            modal.style.display = 'flex';
+            // Add small delay to trigger transitions
             setTimeout(() => {
-                document.getElementById('modalTitle').textContent = data.title;
-                document.getElementById('modalSubtitle').textContent = data.subtitle;
-                document.getElementById('modalDescription').textContent = data.description;
-                document.getElementById('modalVideo').src = data.videosrc;
-                document.getElementById('modalLearnMore').href = data.pageUrl;
-                
-                modal.style.display = 'flex';
-                toggleScrollLock();
-                video.currentTime = 0;
-                video.play();
-            }, 100); // Small delay to ensure DOM is ready
+                modal.classList.add('show');
+            }, 10);
+            toggleScrollLock();
+            video.currentTime = 0;
+            video.play();
         }
     };
 
@@ -92,7 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(video);
 
     solutions.forEach(solution => {
-        solution.querySelector('img').addEventListener('click', () => {
+        const imgContainer = solution.querySelector('.img-container');
+        imgContainer.addEventListener('click', () => {
             const title = solution.querySelector('h2').textContent;
             const data = solutionData[title.split(' ')[0]];
             
@@ -103,9 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('modalLearnMore').href = data.pageUrl;
             
             modal.style.display = 'flex';
-            toggleScrollLock(); // Lock scroll when modal opens
-
-            // Reset and start video when modal opens
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+            toggleScrollLock();
             video.currentTime = 0;
             video.play();
         });
