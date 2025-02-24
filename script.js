@@ -10,14 +10,14 @@ const solutionData = {
         title: 'MiraLABEL / MiraJET 2',
         subtitle: 'In-Line High Speed Labeling',
         videosrc: 'videos/miralabel.mp4',
-        description: 'This system directly prints addresses, barcodes, and indicia on papers and packages using solvent-free ink, reducing label material costs. It features optional controls for stacker turns and ejection to create clean zones. The manual-sealing print unit keeps print heads clean and can interface with MiraSERT inserter controls for better labeling management.',
+        description: 'This system offers in-line high-speed labeling with direct printing of addresses, barcodes, and indicia onto papers and packages, eliminating label material costs. Its Stacker Tracker feature manages stacker rotation and ejection for efficient bundle breaks. When integrated with MiraSERT, it ensures seamless production of inserted products with accurate inserts and addresses.',
         pageUrl: 'pages/miralabel.html'
     },
     'MiraPACKAGE': {
         title: 'MiraPACKAGE',
         subtitle: 'Planning, Scheduling and Inventory',
         videosrc: 'videos/mirapackage.mp4',
-        description: 'The system streamlines receiving and tracking of insert versions while efficiently scheduling multiple inserting machines. It uses non-proprietary workstations, making it user-friendly and cost-effective by eliminating the need for expensive servers and allowing unlimited users without extra licensing fees.',
+        description: 'The system simplifies inventory management by allowing easy tracking of multiple insert versions while optimizing production scheduling for seamless coordination across multiple inserting machines. It reduces operating costs by working with your existing non-proprietary equipment, eliminating the need for expensive hardware upgrades. With no internal server requirements or extra licensing fees, it provides a scalable, cost-effective solution that grows with your business.',
         pageUrl: 'pages/mirapackage.html'
     },
     'MiraSERT': {
