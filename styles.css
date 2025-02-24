@@ -302,10 +302,18 @@ a.cta-button:hover {
         backdrop-filter: none;
         width: 100%;
         pointer-events: auto;
+        text-align: center; /* Add center alignment for mobile */
     }
 
     .solution img {
         transform: none;
+    }
+
+    .solution .img-container {
+        width: 100%; /* Make container full width on mobile */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center all content */
     }
 }
 
