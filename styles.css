@@ -181,6 +181,28 @@ footer {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     margin-top: auto; /* Add this to push footer to bottom */
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+footer p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    word-spacing: 2px;
+}
+
+footer a {
+    color: #4379BD;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+footer a:hover {
+    color: #365f8a;
 }
 
 .cta-button, 
@@ -635,6 +657,18 @@ a.cta-button:hover {
     .product-content {
         margin: -30px auto 0; /* Less negative margin on mobile */
     }
+
+    footer {
+        font-size: 12px;
+        padding: 15px 10px;
+    }
+
+    footer p {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -670,16 +704,8 @@ a.cta-button:hover {
     }
 
     footer {
-        font-size: 12px;
-        padding: 0 10px;
-    }
-
-    nav {
-        height: 80px;
-    }
-
-    .hero {
-        margin-top: 15px;
+        font-size: 11px;
+        padding: 12px 8px;
     }
 }
 
