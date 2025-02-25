@@ -210,7 +210,7 @@ a.cta-button:hover {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    width: 80%;
+    width: min(90%, 1600px); /* Added min() function for better width control */
     margin: 10px auto;   /* Reduced from 20px */
     padding: 5px;        /* Reduced from 10px */
 }
@@ -221,7 +221,8 @@ a.cta-button:hover {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    height: 400px;
+    height: auto; /* Changed from fixed height */
+    min-height: 350px; /* Added minimum height */
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -236,8 +237,7 @@ a.cta-button:hover {
 .solution .img-container {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    max-width: 500px;
+    width: min(100%, 750px); /* Added min() function */
     aspect-ratio: 16/9;
     margin: 10px auto;
 }
@@ -315,7 +315,7 @@ a.cta-button:hover {
 
     .solution .img-container {
         width: 90%;
-        max-width: 400px;
+        max-width: 600px; /* Increased from 400px (1.5x) */
         display: flex;
         flex-direction: column;
         align-items: center; /* Center all content */
@@ -984,5 +984,22 @@ a.cta-button:hover {
 
     .feature-list p {
         font-size: 16px;
+    }
+}
+
+/* Update tablet/medium screen styles */
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    .solutions {
+        gap: 15px;
+        width: 95%;
+    }
+
+    .solution .img-container {
+        width: 100%;
+    }
+
+    .solution {
+        min-height: 300px;
+        padding: 10px;
     }
 }
