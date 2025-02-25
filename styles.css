@@ -236,8 +236,9 @@ a.cta-button:hover {
 .solution .img-container {
     position: relative;
     overflow: hidden;
-    width: 500px;
-    height: 280px;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 16/9;
     margin: 10px auto;
 }
 
@@ -266,7 +267,7 @@ a.cta-button:hover {
     transform: translate(-50%, -50%) scale(0.9);
     width: calc(100% - 20px);
     color: white;
-    padding: 20px;
+    padding: clamp(10px, 2vw, 20px);
     margin: 0;
     opacity: 0;
     transition: all 0.3s ease;
@@ -274,6 +275,8 @@ a.cta-button:hover {
     background: rgba(67, 121, 189, 0.85);
     backdrop-filter: blur(4px);
     pointer-events: none;
+    font-size: clamp(16px, 2vw, 24px);
+    line-height: 1.3;
 }
 
 /* Desktop hover effects */
@@ -297,12 +300,13 @@ a.cta-button:hover {
         opacity: 1;
         background: none;
         color: inherit;
-        padding: 0;
+        padding: 10px;
         margin: 0 0 15px 0;
         backdrop-filter: none;
         width: 100%;
         pointer-events: auto;
         text-align: center; /* Add center alignment for mobile */
+        font-size: clamp(14px, 4vw, 18px);
     }
 
     .solution img {
@@ -310,7 +314,8 @@ a.cta-button:hover {
     }
 
     .solution .img-container {
-        width: 100%; /* Make container full width on mobile */
+        width: 90%;
+        max-width: 400px;
         display: flex;
         flex-direction: column;
         align-items: center; /* Center all content */
@@ -426,14 +431,14 @@ a.cta-button:hover {
 /* Product Page Specific Styles */
 .product-content {
     width: 80%;
-    margin: 0 auto; /* Changed from 20px to 0 */
+    margin: -50px auto 0; /* Added negative top margin to pull content up */
     padding: 20px;
 }
 
 .product-details {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px; /* Reduced gap from 30px */
 }
 
 .product-section {
@@ -625,6 +630,10 @@ a.cta-button:hover {
 
     .cta-button {
         padding: 10px 20px;  /* Keep padding only */
+    }
+
+    .product-content {
+        margin: -30px auto 0; /* Less negative margin on mobile */
     }
 }
 
@@ -905,7 +914,7 @@ a.cta-button:hover {
 .feature-list {
     list-style: none;
     padding: 0;
-    margin: 10px auto 0;
+    margin: 0 auto; /* Changed from 10px auto 0 */
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Change to 2-column layout */
     gap: 25px;
