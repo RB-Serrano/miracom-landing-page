@@ -35,18 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const solutions = document.querySelectorAll('.solution');
     const video = document.getElementById('modalVideo');
 
-    // Simplified modal functions
-    function closeModal() {
-        if (video) video.pause();
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-        history.replaceState({}, '', window.location.pathname);
-    }
-
     function openModal(productName) {
         const data = solutionData[productName];
         if (!data) return;
-        
+
         document.getElementById('modalTitle').textContent = data.title;
         document.getElementById('modalSubtitle').textContent = data.subtitle;
         document.getElementById('modalDescription').textContent = data.description;
@@ -54,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modalLearnMore').href = data.pageUrl;
         
         modal.style.display = 'flex';
+        modal.classList.add('show');
         document.body.style.overflow = 'hidden';
         
         if (video) {
@@ -62,15 +55,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function closeModal() {
+        if (video) video.pause();
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        history.replaceState({}, '', window.location.pathname);
+    }
+
     // Event Listeners
     closeButton.onclick = closeModal;
     modal.onclick = (e) => { if (e.target === modal) closeModal(); };
     document.onkeydown = (e) => { if (e.key === 'Escape') closeModal(); };
 
-    // Handle URL parameter
+    // Check URL parameters immediately
     const urlParams = new URLSearchParams(window.location.search);
     const showModal = urlParams.get('modal');
-    if (showModal) openModal(showModal);
+    if (showModal) {
+        openModal(showModal);
+    }
 
     solutions.forEach(solution => {
         const imgContainer = solution.querySelector('.img-container');
