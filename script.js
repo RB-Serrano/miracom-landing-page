@@ -37,13 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const closeModal = () => {
         modal.classList.remove('show');
-        // Wait for transition to complete before hiding
         setTimeout(() => {
             modal.style.display = 'none';
-            video.pause();
+            if (video) video.pause();
         }, 300);
-        toggleScrollLock();
-        // Clear URL parameter
+        document.body.style.overflow = '';
+        
+        // Update URL without reload
         const url = new URL(window.location);
         url.searchParams.delete('modal');
         window.history.pushState({}, '', url);
@@ -119,7 +119,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    closeButton.addEventListener('click', closeModal);
+    closeButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeModal();
+    });
+
+    // Improve modal background click handling
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Add escape key handler
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            closeModal();
+        }
+    });
 
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
