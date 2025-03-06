@@ -35,67 +35,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const solutions = document.querySelectorAll('.solution');
     const video = document.getElementById('modalVideo');
 
-    const closeModal = () => {
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.style.display = 'none';
-            if (video) video.pause();
-        }, 300);
+    // Simplified modal functions
+    function closeModal() {
+        if (video) video.pause();
+        modal.style.display = 'none';
         document.body.style.overflow = '';
-        
-        // Update URL without reload
-        const url = new URL(window.location);
-        url.searchParams.delete('modal');
-        window.history.pushState({}, '', url);
-    };
+        history.replaceState({}, '', window.location.pathname);
+    }
 
-    // Function to open modal with proper timing
-    const openModal = (productName) => {
-        console.log('Opening modal for:', productName); // Debug log
+    function openModal(productName) {
         const data = solutionData[productName];
-        if (data) {
-            document.getElementById('modalTitle').textContent = data.title;
-            document.getElementById('modalSubtitle').textContent = data.subtitle;
-            document.getElementById('modalDescription').textContent = data.description;
-            document.getElementById('modalVideo').src = data.videosrc;
-            document.getElementById('modalLearnMore').href = data.pageUrl;
-            
-            modal.style.display = 'flex';
-            // Add small delay to trigger transitions
-            setTimeout(() => {
-                modal.classList.add('show');
-            }, 10);
-            toggleScrollLock();
+        if (!data) return;
+        
+        document.getElementById('modalTitle').textContent = data.title;
+        document.getElementById('modalSubtitle').textContent = data.subtitle;
+        document.getElementById('modalDescription').textContent = data.description;
+        document.getElementById('modalVideo').src = data.videosrc;
+        document.getElementById('modalLearnMore').href = data.pageUrl;
+        
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        if (video) {
             video.currentTime = 0;
             video.play();
         }
-    };
-
-    // Check URL parameters immediately
-    const urlParams = new URLSearchParams(window.location.search);
-    const showModal = urlParams.get('modal');
-    if (showModal) {
-        openModal(showModal);
     }
 
-    // Function to toggle scroll lock
-    const toggleScrollLock = () => {
-        document.body.style.overflow = document.body.style.overflow === 'hidden' ? '' : 'hidden';
-    };
+    // Event Listeners
+    closeButton.onclick = closeModal;
+    modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+    document.onkeydown = (e) => { if (e.key === 'Escape') closeModal(); };
 
-    // Create intersection observer for video
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && modal.style.display === 'flex') {
-                video.play();
-            } else {
-                video.pause();
-            }
-        });
-    }, { threshold: 0.5 });
-
-    // Observe the video element
-    observer.observe(video);
+    // Handle URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const showModal = urlParams.get('modal');
+    if (showModal) openModal(showModal);
 
     solutions.forEach(solution => {
         const imgContainer = solution.querySelector('.img-container');
@@ -113,36 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 modal.classList.add('show');
             }, 10);
-            toggleScrollLock();
+            document.body.style.overflow = 'hidden';
             video.currentTime = 0;
             video.play();
         });
-    });
-
-    closeButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        closeModal();
-    });
-
-    // Improve modal background click handling
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-
-    // Add escape key handler
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.style.display === 'flex') {
-            closeModal();
-        }
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
     });
 
     // Add touch event handling for mobile
